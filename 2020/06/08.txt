@@ -1,0 +1,4 @@
+오늘 작업
+1. kakao push event API로 비즈봇 알림 가입자 그리고 검색 블록을 호출시킨 사용자들에게 메시지를 전달함.
+  하지만 위 두 결과를 array_merge를 한 뒤, array_unique로 중복된 값을 삭제한 뒤, array_values로 색인(indexing)작업을 새로 해야 하는걸 깜박했다.
+  그래서 Undefined offset(오프셋 주소가 없다)는 오류가 발생했다.
