@@ -1,0 +1,17 @@
+crontab은 single threaded라서 동시 작업은 할 수 없다. 오늘도 1만~4만명 가량의 사람들에게 event api에 요청을 보내 메시지를 전송하는데,
+거의 5~10분가량이 걸렸다. 좀 더 빠르게 실행할 순 있으나 같은 시간에 서비스를 2개 예약하는건 피해야 한다.
+
+mysql에서 union을 쓰면 중복제거가 된다고 하지만 중복된 값이 나온다. 아래는 중복된 값이 나오는 쿼리문이다.
+
+SELECT userId
+FROM bizevent
+WHERE openingDate > '20200622'
+OR openingDate = ''
+OR birthDate > '800623'
+GROUP BY userId
+UNION
+SELECT bot_user_key
+FROM (SELECT bot_user_key
+	FROM bizinfosearch
+	ORDER BY id DESC) a
+GROUP BY bot_user_key
